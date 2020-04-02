@@ -8,6 +8,26 @@
 }
 
 .food-item{
-    display: flex;
-    flex-direction: row;
+   border: none;
+}
+
+.menu-item{
+    margin: 20px;
+  
+}
+
+.menu-item img{
+    width: 250px;
+    text-align: center;
+}
+
+
+.card{
+    border: none;
+    border-radius: 20px;
+}
+
+
+.card:hover{
+    box-shadow: 4px 4px 10px lightgray;
 }

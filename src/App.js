@@ -6,6 +6,8 @@ import Search from './Components/Search/Search';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Foods from './Components/Foods/Foods';
 import Meal from './Components/Meal/Meal';
+import Portfolio from './Components/Portfolio/Portfolio';
+import Footer from './Components/Footer/Footer';
 
 
 
@@ -15,6 +17,8 @@ function App() {
       <Header></Header>
       <Search></Search>
       <Foods></Foods>
+      <Portfolio></Portfolio>
+      <Footer></Footer>
     </div>
   );
 }

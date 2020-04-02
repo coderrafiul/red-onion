@@ -1,0 +1,27 @@
+.portfolio-container{
+    margin: 100px;
+
+}
+
+
+
+.we{
+    text-align: left;
+    width: 40%;
+    margin-top: 50px;
+}
+
+.card h5{
+    font-weight: 700;
+}
+.portfolio-desc{
+    text-align: left;
+    color: darkgray;
+    font-weight: 600;
+}
+.see-more{
+    color: blue;
+    font-size: 25px;
+    font-weight: 800;
+    text-align: left;
+}

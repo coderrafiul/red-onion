@@ -1,5 +1,14 @@
+.item-container{
+   
+}
+
 nav a{
     text-decoration: none;
     color: tomato;
     padding: 10px;
+    font-size: 20px;
+}
+
+.category{
+    margin: 30px;
 }
