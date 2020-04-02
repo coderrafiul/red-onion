@@ -9,4 +9,5 @@
 
 .food-item{
     display: flex;
+    flex-direction: row;
 }
