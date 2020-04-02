@@ -3,10 +3,14 @@
     background-image: url(../../images//bannerbackground.png);
     background-position: center;
     position: relative;
+    text-align: center;
    
 }
-
-
+h1{
+    position: absolute;
+    top: 230px;
+   
+}
 .search input{
     position: absolute;
     display: block;
