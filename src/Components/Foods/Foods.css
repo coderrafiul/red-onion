@@ -12,3 +12,11 @@ nav a{
 .category{
     margin: 30px;
 }
+
+.category button{
+    background: none;
+    border: none;
+    color: tomato;
+    padding: 10px;
+    font-weight: 400;
+}

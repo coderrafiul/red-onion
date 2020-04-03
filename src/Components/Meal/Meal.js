@@ -3,7 +3,7 @@ import './Meal.css';
 
 
 const Meal = (props) => {
-    console.log(props.item)
+    // console.log(props.item)
     const{img, name, intro, price}= props.item;
     return (
           <div className="menu-item">

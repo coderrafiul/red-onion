@@ -26,6 +26,7 @@ const Footer = () => {
                             <li>Restaurant near me</li>
                         </ul>
                     </div>
+                    <footer>All rights reserved©rafiul-razib</footer>
                 </div>
             </div>
         </div>
