@@ -1,0 +1,32 @@
+.card-body{
+    text-align: left;
+}
+
+.card-body h1{
+    font-size: 50px;
+}
+
+.card-body h3{
+    text-align: justify;
+    color: gray;
+    font-size: 20px;
+}
+
+.card-body h4{
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.details-card{
+    border: none;
+   
+}
+
+.details-card button{
+    background-color: tomato;
+    width: 100px;
+    border-radius: 20px;
+    color: white;
+    padding: 10px;
+
+}

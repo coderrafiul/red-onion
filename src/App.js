@@ -6,18 +6,36 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Foods from './Components/Foods/Foods';
 import Portfolio from './Components/Portfolio/Portfolio';
 import Footer from './Components/Footer/Footer';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import Details from './Components/Details/Details';
 
 
 
 function App() {
   return (
-    <div className="App">
+    <Router>
+      <div className="App">
       <Header></Header>
-      <Search></Search>
-      <Foods></Foods>
-      <Portfolio></Portfolio>
-      <Footer></Footer>
+      <Switch>
+        <Route exact path="/">
+        <Search></Search>
+        <Foods></Foods>
+        <Portfolio></Portfolio>
+        <Footer></Footer>
+        </Route>
+      
+      
+        <Route path="/details/:foodId">
+          <Details></Details>
+        </Route>
+      </Switch>
     </div>
+    </Router>
   );
 }
 
