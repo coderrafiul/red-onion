@@ -28,6 +28,13 @@
 }
 
 
+
+
 .card:hover{
     box-shadow: 4px 4px 10px lightgray;
+}
+
+.food-card .card-body{
+    text-align: center;
+    color: darkslategray;
 }

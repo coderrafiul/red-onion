@@ -30,3 +30,31 @@
     padding: 10px;
 
 }
+
+.input-group input{
+    width: 50px;
+    border-radius: 30px;
+    border: 2px solid red;
+    font-weight: 600;
+}
+.input-group button{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.input-group{
+    margin-left: 20px;
+}
+
+.addToCart{
+    text-align: left;
+    margin: 100px;
+}
+
+.addToCart input{
+    height: 50px;
+    width: 100px;
+    border-radius: 30px;
+    color: white;
+    background-color: tomato;
+}

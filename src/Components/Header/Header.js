@@ -10,6 +10,7 @@ const Header = () => {
             <img src={Logo} alt=""/>
             </div>
             <div className="checkin d-flex align-items-center">
+                <a href="/">Home</a>
                 <a href="/cart"><img src={Cart} alt=""/></a>
                 <a href="/login">Login</a>
                 <button>Signup</button>

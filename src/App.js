@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Foods from './Components/Foods/Foods';
 import Portfolio from './Components/Portfolio/Portfolio';
 import Footer from './Components/Footer/Footer';
+import NotFound from './Components/NotFound/NotFound'
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,6 +14,7 @@ import {
   Link
 } from "react-router-dom";
 import Details from './Components/Details/Details';
+import Login from './Components/Login/Login';
 
 
 
@@ -28,10 +30,14 @@ function App() {
         <Portfolio></Portfolio>
         <Footer></Footer>
         </Route>
-      
-      
         <Route path="/details/:foodId">
           <Details></Details>
+        </Route>
+        <Route path="/login">
+          <Login></Login>
+        </Route>
+        <Route path="*">
+          <NotFound></NotFound>
         </Route>
       </Switch>
     </div>

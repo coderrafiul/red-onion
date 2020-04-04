@@ -3,6 +3,7 @@ import foodsData from '../../fakeItems/foodsData'
 import { useState } from 'react';
 import './Foods.css';
 import Meal from '../Meal/Meal';
+import { Link } from 'react-router-dom';
 
 const Foods = () => {
     const foods= foodsData.slice(6,12)
@@ -46,7 +47,7 @@ const Foods = () => {
                     </div>
             </div>
             <div className="d-flex justify-content-center">
-                <button className="btn btn-secondary btn-lg" disabled>Checkout Your Food</button>
+                <Link to="/login"><button className="btn btn-secondary btn-lg">Checkout Your Food</button></Link>
             </div>
             
             
