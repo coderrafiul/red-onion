@@ -79,7 +79,7 @@ var foods= [
 
     {
       "id": 7,
-      "name": "Healthy Meal Plan",
+      "name": "Healthy FoodItem Plan",
       "category": "Lunch",
       "intro": "Best Rated Lunch pack",
       "price" : "9.99",

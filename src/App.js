@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Header from './Components/Header/Header';
 import Search from './Components/Search/Search';
@@ -13,35 +13,52 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import Details from './Components/Details/Details';
+import FoodDetails from './Components/FoodDetails/FoodDetails';
 import Login from './Components/Login/Login';
+import { addToDatabaseCart } from './utilities/databaseManager';
 
 
 
 function App() {
+
+  const[cart, setCart]= useState([]);
+  console.log("Ordered food",cart)
+
+  const addToCart= (food)=>{
+    
+    const newCart= [...cart, food];
+    setCart(newCart);
+ 
+    addToDatabaseCart(food.id, 1);
+  
+  }
+
   return (
-    <Router>
-      <div className="App">
-      <Header></Header>
-      <Switch>
-        <Route exact path="/">
-        <Search></Search>
-        <Foods></Foods>
-        <Portfolio></Portfolio>
-        <Footer></Footer>
-        </Route>
-        <Route path="/details/:foodId">
-          <Details></Details>
-        </Route>
-        <Route path="/login">
-          <Login></Login>
-        </Route>
-        <Route path="*">
-          <NotFound></NotFound>
-        </Route>
-      </Switch>
-    </div>
-    </Router>
+
+ 
+      <Router>
+          <div className="App">
+          <Header cart={cart}></Header>
+            <Switch>
+              <Route exact path="/">
+              <Search></Search>
+              <Foods></Foods>
+              <Portfolio></Portfolio>
+              <Footer></Footer>
+              </Route>
+              <Route path="/FoodDetails/:foodId">
+                <FoodDetails addToCart={addToCart}></FoodDetails>
+              </Route>
+              <Route path="/login">
+                <Login></Login>
+              </Route>
+              <Route path="*">
+                <NotFound></NotFound>
+              </Route>
+            </Switch>
+        </div>
+      </Router>
+
   );
 }
 

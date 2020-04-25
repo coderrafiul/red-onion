@@ -17,12 +17,12 @@
     font-weight: 600;
 }
 
-.details-card{
+.FoodDetails-card{
     border: none;
    
 }
 
-.details-card button{
+.FoodDetails-card button{
     background-color: tomato;
     width: 100px;
     border-radius: 20px;

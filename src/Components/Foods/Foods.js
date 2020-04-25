@@ -2,14 +2,17 @@ import React from 'react';
 import foodsData from '../../fakeItems/foodsData'
 import { useState } from 'react';
 import './Foods.css';
-import Meal from '../Meal/Meal';
 import { Link } from 'react-router-dom';
+import FoodItem from '../FoodItem/FoodItem';
 
 const Foods = () => {
     const foods= foodsData.slice(6,12)
     const[menu, setMenu]= useState(foods);
-  
+    
 
+    const handleAddFood= () =>{
+        console.log("Food Added")
+    }
 
     const cat1= foodsData.filter(fd=>fd.category==="Breakfast")
     const handleBreakfast=(cat1)=>{
@@ -43,11 +46,12 @@ const Foods = () => {
             </div>
             <div className="container">
                     <div className="row d-flex justify-content-between">
-                    {menu.map(food=> <Meal key={food.id} item= {food}></Meal>)}
+                    {menu.map(food=> <FoodItem key={food.id} item= {food}></FoodItem>)}
+                    
                     </div>
             </div>
             <div className="d-flex justify-content-center">
-                <Link to="/login"><button className="btn btn-secondary btn-lg">Checkout Your Food</button></Link>
+                <Link to="/login"><button className="btn btn-secondary btn-lg" onClick= {handleAddFood}>Checkout Your Food</button></Link>
             </div>
             
             
