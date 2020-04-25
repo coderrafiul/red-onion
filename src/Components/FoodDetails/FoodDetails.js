@@ -2,28 +2,18 @@ import React, { useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import foodsData from '../../fakeItems/foodsData'
 import './FoodDetails.css';
-import { useState } from 'react';
-import {UserContext} from '../../App';
+
 
 const FoodDetails = (props) => {
-    
-    console.log(props);
+  
     const{foodId}=useParams();
     const itemFoodDetails= foodsData.find(fd=>fd.id == foodId);
 
 
     const{name, price, description, img}= itemFoodDetails;
 
-    const [qnty, setQnty]= useState(1);
-
-    const handleAdd= ()=>{
-        setQnty (qnty+1);
-    }
-
-    const handleRemove=()=>{
-        setQnty(qnty-1)
-    }
-    const totalPrice= price*qnty
+    const itemPrice= props.qnty
+    const totalPrice= price*itemPrice;
     return (
         <div className="container d-flex justify-content-start">
             
@@ -41,9 +31,9 @@ const FoodDetails = (props) => {
                         </div>
                         <br/>
                         <div className="input-group">
-                        <button onClick={handleAdd}>+</button>
-                        <input className="text-center" type="text" name="qnty" value={qnty}/>
-                        <button onClick={handleRemove}>-</button>
+                        <button onClick={props.handleAdd}>+</button>
+                        <input className="text-center" type="text" name="qnty" value={props.qnty}/>
+                        <button onClick={props.handleRemove}>-</button>
                         </div>
                         </div>
                         <div className="addToCart">

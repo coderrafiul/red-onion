@@ -5,7 +5,11 @@ import './Foods.css';
 import { Link } from 'react-router-dom';
 import FoodItem from '../FoodItem/FoodItem';
 
-const Foods = () => {
+const Foods = (props) => {
+    console.log(props);
+
+    const cart= props.cart;
+    
     const foods= foodsData.slice(6,12)
     const[menu, setMenu]= useState(foods);
     
@@ -35,6 +39,8 @@ const Foods = () => {
         console.log(menu);
     }
 
+
+
     return (
         <div className="item-container">
             <div className="category">
@@ -51,7 +57,14 @@ const Foods = () => {
                     </div>
             </div>
             <div className="d-flex justify-content-center">
-                <Link to="/login"><button className="btn btn-secondary btn-lg" onClick= {handleAddFood}>Checkout Your Food</button></Link>
+              {
+                  cart.length ?
+                    <Link to="/login">
+                      <button className="btn btn-secondary btn-lg" onClick= {handleAddFood}>Checkout Your Food</button>
+                    </Link>
+                  :
+                  <button className="btn btn-secondary btn-lg" onClick= {handleAddFood} disabled>Checkout Your Food</button>
+              }
             </div>
             
             

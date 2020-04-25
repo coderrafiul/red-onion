@@ -19,18 +19,38 @@ import { addToDatabaseCart } from './utilities/databaseManager';
 
 
 
+
+
+
+
 function App() {
 
+  const [qnty, setQnty]= useState(1);
+
+  const handleAdd= ()=>{
+      setQnty (qnty+1);
+  }
+
+  const handleRemove=()=>{
+      setQnty(qnty-1)
+  }
+
   const[cart, setCart]= useState([]);
+  
   console.log("Ordered food",cart)
 
   const addToCart= (food)=>{
-    
+    const sameItem= cart.find(crt=> crt.id == food.id)
     const newCart= [...cart, food];
     setCart(newCart);
- 
-    addToDatabaseCart(food.id, 1);
-  
+    if(sameItem){
+      const reamingCarts = cart.filter(crt => cart.id != food);
+      setCart(reamingCarts);
+    }else{
+      const newCart = [...cart,food]
+      setCart(newCart);
+    }
+    addToDatabaseCart(food.id,qnty)
   }
 
   return (
@@ -42,12 +62,12 @@ function App() {
             <Switch>
               <Route exact path="/">
               <Search></Search>
-              <Foods></Foods>
+              <Foods cart={cart}></Foods>
               <Portfolio></Portfolio>
               <Footer></Footer>
               </Route>
               <Route path="/FoodDetails/:foodId">
-                <FoodDetails addToCart={addToCart}></FoodDetails>
+                <FoodDetails addToCart={addToCart} handleAdd={handleAdd} handleRemove={handleRemove} qnty={qnty}></FoodDetails>
               </Route>
               <Route path="/login">
                 <Login></Login>
