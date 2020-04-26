@@ -8,7 +8,7 @@ import FoodItem from '../FoodItem/FoodItem';
 const Foods = (props) => {
     console.log(props);
 
-    const cart= props.cart;
+    const cart= props.finalCart;
     
     const foods= foodsData.slice(6,12)
     const[menu, setMenu]= useState(foods);

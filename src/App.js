@@ -16,6 +16,7 @@ import {
 import FoodDetails from './Components/FoodDetails/FoodDetails';
 import Login from './Components/Login/Login';
 import { addToDatabaseCart } from './utilities/databaseManager';
+import Review from './Components/Review/Review';
 
 
 
@@ -24,6 +25,8 @@ import { addToDatabaseCart } from './utilities/databaseManager';
 
 
 function App() {
+
+  const[finalCart, setFinalCart]= useState([])
 
   const [qnty, setQnty]= useState(1);
 
@@ -35,20 +38,20 @@ function App() {
       setQnty(qnty-1)
   }
 
-  const[cart, setCart]= useState([]);
+  // const[cart, setCart]= useState([]);
   
-  console.log("Ordered food",cart)
+  console.log("Ordered food",finalCart)
 
   const addToCart= (food)=>{
-    const sameItem= cart.find(crt=> crt.id == food.id)
-    const newCart= [...cart, food];
-    setCart(newCart);
+    const sameItem= finalCart.find(crt=> crt.id == food.id)
+    const newCart= [...finalCart, food];
+    setFinalCart(newCart);
     if(sameItem){
-      const reamingCarts = cart.filter(crt => cart.id != food);
-      setCart(reamingCarts);
+      const reamingCarts = finalCart.filter(crt => finalCart.id != food);
+      setFinalCart(reamingCarts);
     }else{
-      const newCart = [...cart,food]
-      setCart(newCart);
+      const newCart = [...finalCart,food]
+      setFinalCart(newCart);
     }
     addToDatabaseCart(food.id,qnty)
   }
@@ -58,16 +61,19 @@ function App() {
  
       <Router>
           <div className="App">
-          <Header cart={cart}></Header>
+          <Header finalCart={finalCart}></Header>
             <Switch>
               <Route exact path="/">
               <Search></Search>
-              <Foods cart={cart}></Foods>
+              <Foods finalCart={finalCart}></Foods>
               <Portfolio></Portfolio>
               <Footer></Footer>
               </Route>
               <Route path="/FoodDetails/:foodId">
                 <FoodDetails addToCart={addToCart} handleAdd={handleAdd} handleRemove={handleRemove} qnty={qnty}></FoodDetails>
+              </Route>
+              <Route path="/cart">
+                <Review finalCart={finalCart} setFinalCart={setFinalCart}></Review>
               </Route>
               <Route path="/login">
                 <Login></Login>

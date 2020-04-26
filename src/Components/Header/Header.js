@@ -12,7 +12,7 @@ const Header = (props) => {
             </div>
             <div className="checkin d-flex align-items-center">
                 <a href="/">Home</a>
-                <a href="/cart"><img src={Cart} alt=""/><span className="badge bg-danger">{props.cart.length}</span> </a>
+                <a href="/cart"><img src={Cart} alt=""/><span className="badge bg-danger">{props.finalCart.length}</span> </a>
                 <a href="/login">Login</a>
                 <button>Signup</button>
             </div>
