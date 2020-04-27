@@ -1,0 +1,19 @@
+.login-form{
+    margin: 30px 100px;
+}
+
+.login-form input{
+    display: block;
+    width: 350px;
+    padding: 10px;
+    background-color: rgb(245, 245, 245);
+    border: none;
+    border-radius: 5px;
+}
+
+input.btn-submit{
+
+    background-color: rgb(249, 25, 68);
+    color: white;
+    font-weight: 400;
+}

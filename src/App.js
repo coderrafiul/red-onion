@@ -20,15 +20,23 @@ import Review from './Components/Review/Review';
 
 
 
-
-
-
-
 function App() {
 
   const[finalCart, setFinalCart]= useState([])
 
   const [qnty, setQnty]= useState(1);
+
+  const[user, setUser]= useState({
+    isSignedIn: false,
+    name: '',
+    email: '',
+    photo: '',
+    password: '',
+    confirmPass: '',
+    error: '',
+    isValid: false,
+    existingUser: false
+})
 
   const handleAdd= ()=>{
       setQnty (qnty+1);
@@ -38,7 +46,6 @@ function App() {
       setQnty(qnty-1)
   }
 
-  // const[cart, setCart]= useState([]);
   
   console.log("Ordered food",finalCart)
 
@@ -61,7 +68,7 @@ function App() {
  
       <Router>
           <div className="App">
-          <Header finalCart={finalCart}></Header>
+          <Header finalCart={finalCart} user={user} setUser={setUser}></Header>
             <Switch>
               <Route exact path="/">
               <Search></Search>
@@ -76,7 +83,7 @@ function App() {
                 <Review finalCart={finalCart} setFinalCart={setFinalCart}></Review>
               </Route>
               <Route path="/login">
-                <Login></Login>
+                <Login user={user} setUser={setUser}></Login>
               </Route>
               <Route path="*">
                 <NotFound></NotFound>
