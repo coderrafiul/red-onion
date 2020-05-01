@@ -19,7 +19,7 @@ const Header = (props) => {
             <div className="checkin d-flex align-items-center">
                 <a href="/">Home</a>
                 <a href="/cart"><img src={Cart} alt=""/><span className="badge bg-danger">{props.finalCart.length}</span> </a>
-                <a href="/login">Login</a>
+                
                 { auth.user.isSignedIn? 
                     <button onClick={auth.signOut}>SignOut</button>
                     :

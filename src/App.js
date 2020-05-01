@@ -16,7 +16,8 @@ import FoodDetails from './Components/FoodDetails/FoodDetails';
 import Login from './Components/Login/Login';
 import { addToDatabaseCart } from './utilities/databaseManager';
 import Review from './Components/Review/Review';
-import { AuthContextProvider } from './Components/Login/useAuth';
+import { AuthContextProvider, PrivateRoute } from './Components/Login/useAuth';
+import Shipment from './Components/Shipment/Shipment';
 
 
 
@@ -62,7 +63,9 @@ function App() {
                 <Switch>
                   <Route exact path="/">
                   <Search></Search>
+                  <Route>
                   <Foods finalCart={finalCart}></Foods>
+                  </Route>
                   <Portfolio></Portfolio>
                   <Footer></Footer>
                   </Route>
@@ -74,6 +77,9 @@ function App() {
                   </Route>
                   <Route path="/login">
                     <Login></Login>
+                  </Route>
+                  <Route path="/shipment">
+                    <Shipment></Shipment>
                   </Route>
                   <Route path="*">
                     <NotFound></NotFound>

@@ -1,0 +1,25 @@
+.ship-form{
+    margin: 30px 100px;
+
+}
+
+.ship-form input{
+    display: block;
+    width: 350px;
+    padding: 10px;
+    background-color: rgb(245, 245, 245);
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+input.btn-submit{
+    background-color: rgb(249, 25, 68);
+    color: white;
+    font-weight: 400;
+}
+
+.ship-header{
+    font-size: 100px;
+    text-decoration: underline;
+}

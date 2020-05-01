@@ -37,7 +37,7 @@ const FoodDetails = (props) => {
                         </div>
                         </div>
                         <div className="addToCart">
-                            <input type="submit" value="Add to cart" onClick={()=>props.addToCart(itemFoodDetails)} />
+                            <input type="submit" value="Add to cart" onClick={()=>props.addToCart(itemFoodDetails) & window.history.back()} />
                         </div>
                     </div>
                     </div>

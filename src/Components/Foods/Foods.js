@@ -59,7 +59,7 @@ const Foods = (props) => {
             <div className="d-flex justify-content-center">
               {
                   cart.length ?
-                    <Link to="/login">
+                    <Link to="/shipment">
                       <button className="btn btn-secondary btn-lg" onClick= {handleAddFood}>Checkout Your Food</button>
                     </Link>
                   :

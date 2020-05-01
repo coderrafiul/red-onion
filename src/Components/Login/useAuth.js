@@ -5,6 +5,7 @@ import firebaseConfig from "../../firebase.config";
 import { useState } from "react";
 import { createContext } from "react";
 import { useContext } from 'react';
+import { Route, Redirect } from 'react-router-dom';
 
 
 firebase.initializeApp(firebaseConfig);
@@ -17,6 +18,27 @@ export const AuthContextProvider = (props)=>{
 }
 
 export const useAuth = () => useContext(AuthContext);
+
+export const PrivateRoute = ({ children, ...rest })=> {
+    const auth= useAuth();
+    return (
+      <Route
+        {...rest}
+        render={({ location }) =>
+          auth.user.isSignedIn ? (
+            children
+          ) : (
+            <Redirect
+              to={{
+                pathname: "/login",
+                state: { from: location }
+              }}
+            />
+          )
+        }
+      />
+    );
+  }
 
 
 const Auth=()=>{
@@ -34,14 +56,16 @@ const Auth=()=>{
 
     
     const signUp=(email, password)=>{
-        firebase.auth().createUserWithEmailAndPassword(email, password)
+        return firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(res=>{
             const createdUser= {...user}
             createdUser.isSignedIn= true;
             createdUser.error= '';
             setUser(createdUser);
             return user;
+            
         })
+       
         .catch(err=>{
             const createdUser= {...user}
             createdUser.isSignedIn= false;
@@ -52,7 +76,7 @@ const Auth=()=>{
     }
 
     const signInWithEmailAndPassword=(email, password)=>{
-        firebase.auth().signInWithEmailAndPassword(email, password)
+        return firebase.auth().signInWithEmailAndPassword(email, password)
         .then(res =>{
             const createdUser= {...user}
             createdUser.isSignedIn= true;

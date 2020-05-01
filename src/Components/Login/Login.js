@@ -60,6 +60,9 @@ const Login = () => {
     const createAccount= (event) =>{
         if (user.isValid) {
            auth.signUp(user.email, user.password)
+           .then(res=>{
+               window.history.back()
+           })
         
         }
         else{
@@ -73,6 +76,11 @@ const Login = () => {
     const signIn=(event)=>{
         if (user.isValid) {
             auth.signInWithEmailAndPassword(user.email, user.password)
+            .then(res=>{
+                window.history.back()
+            }
+                
+            )
         }
         else{
             console.log("Couldn't Sign In")
