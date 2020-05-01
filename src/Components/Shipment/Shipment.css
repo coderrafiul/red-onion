@@ -10,7 +10,7 @@
     background-color: rgb(245, 245, 245);
     border: none;
     border-radius: 5px;
-    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 input.btn-submit{
@@ -20,6 +20,12 @@ input.btn-submit{
 }
 
 .ship-header{
-    font-size: 100px;
+ 
     text-decoration: underline;
+    text-align: center;
+}
+
+.error{
+    display: block;
+    color: red;
 }

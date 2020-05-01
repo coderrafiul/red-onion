@@ -79,7 +79,7 @@ function App() {
                     <Login></Login>
                   </Route>
                   <Route path="/shipment">
-                    <Shipment></Shipment>
+                    <Shipment finalCart={finalCart}></Shipment>
                   </Route>
                   <Route path="*">
                     <NotFound></NotFound>
