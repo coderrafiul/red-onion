@@ -11,12 +11,12 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 import FoodDetails from './Components/FoodDetails/FoodDetails';
 import Login from './Components/Login/Login';
 import { addToDatabaseCart } from './utilities/databaseManager';
 import Review from './Components/Review/Review';
+import { AuthContextProvider } from './Components/Login/useAuth';
 
 
 
@@ -26,17 +26,6 @@ function App() {
 
   const [qnty, setQnty]= useState(1);
 
-  const[user, setUser]= useState({
-    isSignedIn: false,
-    name: '',
-    email: '',
-    photo: '',
-    password: '',
-    confirmPass: '',
-    error: '',
-    isValid: false,
-    existingUser: false
-})
 
   const handleAdd= ()=>{
       setQnty (qnty+1);
@@ -47,7 +36,7 @@ function App() {
   }
 
   
-  console.log("Ordered food",finalCart)
+  // console.log("Ordered food",finalCart)
 
   const addToCart= (food)=>{
     const sameItem= finalCart.find(crt=> crt.id == food.id)
@@ -68,27 +57,29 @@ function App() {
  
       <Router>
           <div className="App">
-          <Header finalCart={finalCart} user={user} setUser={setUser}></Header>
-            <Switch>
-              <Route exact path="/">
-              <Search></Search>
-              <Foods finalCart={finalCart}></Foods>
-              <Portfolio></Portfolio>
-              <Footer></Footer>
-              </Route>
-              <Route path="/FoodDetails/:foodId">
-                <FoodDetails addToCart={addToCart} handleAdd={handleAdd} handleRemove={handleRemove} qnty={qnty}></FoodDetails>
-              </Route>
-              <Route path="/cart">
-                <Review finalCart={finalCart} setFinalCart={setFinalCart}></Review>
-              </Route>
-              <Route path="/login">
-                <Login user={user} setUser={setUser}></Login>
-              </Route>
-              <Route path="*">
-                <NotFound></NotFound>
-              </Route>
-            </Switch>
+            <AuthContextProvider>
+              <Header finalCart={finalCart} ></Header>
+                <Switch>
+                  <Route exact path="/">
+                  <Search></Search>
+                  <Foods finalCart={finalCart}></Foods>
+                  <Portfolio></Portfolio>
+                  <Footer></Footer>
+                  </Route>
+                  <Route path="/FoodDetails/:foodId">
+                    <FoodDetails addToCart={addToCart} handleAdd={handleAdd} handleRemove={handleRemove} qnty={qnty}></FoodDetails>
+                  </Route>
+                  <Route path="/cart">
+                    <Review finalCart={finalCart} setFinalCart={setFinalCart}></Review>
+                  </Route>
+                  <Route path="/login">
+                    <Login></Login>
+                  </Route>
+                  <Route path="*">
+                    <NotFound></NotFound>
+                  </Route>
+                </Switch>
+            </AuthContextProvider>
         </div>
       </Router>
 
