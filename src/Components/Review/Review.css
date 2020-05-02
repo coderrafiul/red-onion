@@ -1,0 +1,21 @@
+.review-card{
+    background-color:  rgb(245, 245, 245);
+}
+
+.quantity{
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.q-btn{
+    padding: 5px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.order-info{
+    text-align: left;
+}

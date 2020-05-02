@@ -1,28 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import { getDatabaseCart } from '../../utilities/databaseManager';
-import foodsData from '../../fakeItems/foodsData'
+import React from 'react';
+import './Review.css'
 
 const Review = (props) => {
 
-    
+    const{img, name, price, quantity}= props.element;
 
-    useEffect(()=>{
-        // cart
-        const savedCart= getDatabaseCart();
-        const foodId= Object.keys(savedCart);
 
-        const cartFoods= foodId.map(id => {
-            const addedFood = foodsData.find(food => food.id == id);
-            addedFood.quantity= savedCart[id];
-            return addedFood;
-        })
-
-        props.setFinalCart(cartFoods);
-     
-    },[])
     return (
         <div>
-            <h1>Cart Items: {props.finalCart.length}</h1>
+           
+            <div className="card mb-3 review-card" style= {{maxWidth: 100 + '%' }}>
+                <div  className="row no-gutters">
+                    <div className="col-md-4">
+                        <img src={img} className="card-img" alt="..."/>
+                    </div>
+                    <div className="col-md-5">
+                        <div className="card-body">
+                                <h5 className="card-title">{name}</h5>
+                                <p style={{color: "red", fontWeight: 700, fontSize: 20 +"px"}} className="card-text">$ {price}</p>
+                                <p className="card-text"><small className="text-muted">Delivery Free</small></p>
+                        </div>
+                    </div>
+                    <div className="col-md-3 d-flex justify-content-start align-items-center">
+                        <button className="btn btn-light q-btn">-</button>
+                        <span className="quantity"> {quantity} </span>
+                        <button className="btn btn-light q-btn">+</button>
+                    </div>
+                    
+                </div>
+            </div>
         </div>
     );
 };

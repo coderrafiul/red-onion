@@ -1,16 +1,57 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import './Shipment.css'
+import Review from '../Review/Review';
+import foodsData from '../../fakeItems/foodsData'
+import { getDatabaseCart } from '../../utilities/databaseManager';
+import { useState } from 'react';
 
 const Shipment = (props) => {
 
-    console.log(props.finalCart)
+    const[customer, setCustomer]= useState(null)
+
+
     const { register, handleSubmit,errors } = useForm();
     const onSubmit = data => {
-        console.log(data)
+        const newCustomer= {data};
+        setCustomer(newCustomer);
     };
 
-  
+    console.log("Buyer", customer);
+    
+
+    
+    useEffect(()=>{
+        // cart
+        const savedCart= getDatabaseCart();
+        const foodId= Object.keys(savedCart);
+
+        const cartFoods= foodId.map(id => {
+            const addedFood = foodsData.find(food => food.id == id);
+            addedFood.quantity= savedCart[id];
+            return addedFood;
+        })
+
+
+        console.log(cartFoods)
+
+        props.setFinalCart(cartFoods)
+        
+     
+    },[])
+
+    const cart= props.finalCart;
+
+    const subTotal= cart.reduce((subTotal, food)=> subTotal + food.price*food.quantity,0);
+    const tax= subTotal/10;
+    const delivery= 10;
+    const total= (subTotal+ tax+ delivery);
+
+    
+
+    
+    
+    
     return (
         <div className="container">
             
@@ -47,7 +88,26 @@ const Shipment = (props) => {
                 </div>
 
                 <div className="order-preview col-md-6">
-                    <h4>This is order preview</h4>
+                    <div className="order-info">
+                        <h5>From Uttara Mascot Plaza</h5>
+                        <h6>Arriving in 20-30 minutes</h6>
+                        <h6>Road no: 06, Sector: 10.</h6>
+                    </div>
+                    <br/>
+                    {props.finalCart.map(food=> <Review key={food.id} element={food}></Review>)}
+                    <div className="bill">
+                        <h6>Subtotal: $ {subTotal.toFixed(2)} </h6>
+                        <h6>Tax: $ {tax.toFixed(2)}</h6>
+                        <h6>Delivery fee: $ {delivery}</h6>
+                        <h5>Total: $ {total.toFixed(2)}</h5>
+                    </div>
+                    {
+                        customer ?
+                        <button className="btn btn-secondary btn-lg place-order">Place Order</button>
+                        :
+                        <button className="btn btn-secondary btn-lg place-order" disabled>Place Order</button>
+                    }
+
                 </div>
 
             </div>

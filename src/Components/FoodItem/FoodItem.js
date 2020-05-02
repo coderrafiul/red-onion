@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 
 const FoodItem = (props) => {
-
+   
     const{img, name, intro, price, id}= props.item;
     return (
           <div className="menu-item">

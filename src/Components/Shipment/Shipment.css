@@ -29,3 +29,20 @@ input.btn-submit{
     display: block;
     color: red;
 }
+.order-info{
+    text-align: left;
+}
+
+.bill{
+    text-align: left; 
+}
+
+.place-order{
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    
+    color: white;
+    font-weight: 400;
+    padding: 10px;
+}

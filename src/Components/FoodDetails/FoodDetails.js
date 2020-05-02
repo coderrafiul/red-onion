@@ -9,7 +9,7 @@ const FoodDetails = (props) => {
     const{foodId}=useParams();
     const itemFoodDetails= foodsData.find(fd=>fd.id == foodId);
 
-
+    console.log(itemFoodDetails)
     const{name, price, description, img}= itemFoodDetails;
 
     const itemPrice= props.qnty

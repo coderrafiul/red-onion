@@ -72,14 +72,11 @@ function App() {
                   <Route path="/FoodDetails/:foodId">
                     <FoodDetails addToCart={addToCart} handleAdd={handleAdd} handleRemove={handleRemove} qnty={qnty}></FoodDetails>
                   </Route>
-                  <Route path="/cart">
-                    <Review finalCart={finalCart} setFinalCart={setFinalCart}></Review>
-                  </Route>
                   <Route path="/login">
                     <Login></Login>
                   </Route>
                   <Route path="/shipment">
-                    <Shipment finalCart={finalCart}></Shipment>
+                    <Shipment finalCart={finalCart} setFinalCart={setFinalCart}></Shipment>
                   </Route>
                   <Route path="*">
                     <NotFound></NotFound>
