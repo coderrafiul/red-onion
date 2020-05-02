@@ -15,7 +15,6 @@ import {
 import FoodDetails from './Components/FoodDetails/FoodDetails';
 import Login from './Components/Login/Login';
 import { addToDatabaseCart } from './utilities/databaseManager';
-import Review from './Components/Review/Review';
 import { AuthContextProvider, PrivateRoute } from './Components/Login/useAuth';
 import Shipment from './Components/Shipment/Shipment';
 import OrderComplete from './Components/OrderComplete/OrderComplete';
@@ -76,9 +75,9 @@ function App() {
                   <Route path="/login">
                     <Login></Login>
                   </Route>
-                  <Route path="/shipment">
+                  <PrivateRoute path="/shipment">
                     <Shipment finalCart={finalCart} setFinalCart={setFinalCart}></Shipment>
-                  </Route>
+                  </PrivateRoute>
                   <Route path="/ordered">
                     <OrderComplete></OrderComplete>
                   </Route>

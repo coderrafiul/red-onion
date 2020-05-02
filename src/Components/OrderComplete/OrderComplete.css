@@ -2,6 +2,7 @@
     width: 90%;
     border-radius: 10px;
     margin-top: 50px;
+    
 }
 
 .location{
@@ -13,18 +14,39 @@
 } 
 
 .deliveryLogo{
-    width: 40%
+    width: 40%;
+    padding: 10px
 }
 
 .body{
-    background-color: lightgray;
+    background-color: rgb(245, 245, 245);
 }
 
 .time p{
-    font-size: 400%;
+    font-size: 300%;
     font-weight: 400;
 }
 
 .time h5{
     font-weight: 400;
+}
+
+/* .summary{
+    margin-left: 20px;
+} */
+
+.raider img{
+    width: 80%;
+}
+
+.raider{
+    margin-left: 5%;
+}
+
+.location{
+    margin: 0 auto;;
+}
+
+button.place-order{
+    background-color: rgb(249, 25, 68);
 }

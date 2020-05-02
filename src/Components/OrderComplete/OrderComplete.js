@@ -14,34 +14,33 @@ const OrderComplete = () => {
                         <img src={demoMap} alt=""/>
                     </div>
 
-                    <div className="col-md-4 summary">
-                        <div className="card body" style={{maxWidth: 100 +"%"}}>
+                    <div className="col-md-4 summary d-flex justify-content-center">
+                        <div className="card body" style={{maxWidth: 90 +"%"}}>
                         <div className="deliveryLogo">
                         <img  src={deliveryLogo} className="card-img-top" alt="..."/>
                         </div>
                         <div className="location">
-                            <h3>Your location</h3>
-                            <h5>Road: 06, Sector: 10</h5>
+                            <h4>Your location</h4>
+                            <h6>Road: 06, Sector: 10</h6>
                             <br/>
-                            <br/>
-                            <br/>
-                            <h3>Shop address</h3>
-                            <h5>Uttara Mascot Plaza</h5>
+                           
+                            <h4>Shop address</h4>
+                            <h6>Uttara Mascot Plaza</h6>
                         </div>
                         <div className="time">
                             <p>09:30</p>
 
-                            <h5>Estimated delivery time</h5>
+                            <h6>Estimated delivery time</h6>
                         </div>
                         <div className="raider">
                         <div class="card mb-3" style={{maxWidth: 90+ "%"}}>
-                            <div className="row no-gutters">
+                            <div className="row no-gutters d-flex justify-content-around align-items-center">
                                 <div className="col-md-4">
                                 <img src={ helmetLogo } className="card-img" alt="..."/>
                                 </div>
                                 <div className="col-md-8">
                                 <div className="card-body">
-                                    <h5 className="card-title raider">Hamim</h5>
+                                    <h6 className="card-title raider">Hamim</h6>
                                     <p className="card-text"><small class="text-muted">Your raider</small></p>
                                 </div>
                                 </div>
@@ -49,7 +48,7 @@ const OrderComplete = () => {
                             </div>
                         </div>
                         <div className="card-body">
-                            <button className="btn btn-secondary btn-lg place-order" >Contact us</button>
+                            <button className="btn btn-secondary place-order" >Contact us</button>
                           
                         </div>
                         </div>
