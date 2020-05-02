@@ -5,6 +5,7 @@ import Review from '../Review/Review';
 import foodsData from '../../fakeItems/foodsData'
 import { getDatabaseCart } from '../../utilities/databaseManager';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Shipment = (props) => {
 
@@ -103,7 +104,9 @@ const Shipment = (props) => {
                     </div>
                     {
                         customer ?
+                        <Link to="/ordered">
                         <button className="btn btn-secondary btn-lg place-order">Place Order</button>
+                        </Link>
                         :
                         <button className="btn btn-secondary btn-lg place-order" disabled>Place Order</button>
                     }

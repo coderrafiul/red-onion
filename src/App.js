@@ -18,6 +18,7 @@ import { addToDatabaseCart } from './utilities/databaseManager';
 import Review from './Components/Review/Review';
 import { AuthContextProvider, PrivateRoute } from './Components/Login/useAuth';
 import Shipment from './Components/Shipment/Shipment';
+import OrderComplete from './Components/OrderComplete/OrderComplete';
 
 
 
@@ -77,6 +78,9 @@ function App() {
                   </Route>
                   <Route path="/shipment">
                     <Shipment finalCart={finalCart} setFinalCart={setFinalCart}></Shipment>
+                  </Route>
+                  <Route path="/ordered">
+                    <OrderComplete></OrderComplete>
                   </Route>
                   <Route path="*">
                     <NotFound></NotFound>
