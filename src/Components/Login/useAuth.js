@@ -55,14 +55,21 @@ const Auth=()=>{
     })
 
     
-    const signUp=(email, password)=>{
+    const signUp=(email, password, name)=>{
         return firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(res=>{
-            const createdUser= {...user}
-            createdUser.isSignedIn= true;
-            createdUser.error= '';
-            setUser(createdUser);
-            return user;
+            
+            if(user){
+              firebase.auth().currentUser.updateProfile({
+                displayName: name
+              }).then(()=>{
+                const createdUser= {...user}
+                createdUser.isSignedIn= true;
+                createdUser.error= '';
+                setUser(createdUser);
+                return user;
+              })
+            }
             
         })
        

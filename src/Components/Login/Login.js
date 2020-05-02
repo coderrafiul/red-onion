@@ -49,6 +49,7 @@ const Login = () => {
             isValid= event.target.value.length> 8 && hasNumber(event.target.value)
         }
 
+     
         newUserInfo[event.target.name]= event.target.value;
         newUserInfo.isValid= isValid;
         setUser(newUserInfo);
@@ -58,16 +59,24 @@ const Login = () => {
 
 
     const createAccount= (event) =>{
-        if (user.isValid) {
-           auth.signUp(user.email, user.password)
-           .then(res=>{
-               window.history.back()
-           })
-        
+
+       
+        if (user.password !== user.confirmPass) {
+            alert("Passwords don't match");
+        } else {
+            if (user.isValid) {
+                auth.signUp(user.email, user.password, user.name)
+                .then(res=>{
+                    // window.history.back()
+                })
+             
+             }
+             else{
+                 console.log("Form is not valid")
+             }
         }
-        else{
-            console.log("Form is not valid")
-        }
+
+       
         event.preventDefault();
         event.target.reset();
     }
@@ -77,7 +86,7 @@ const Login = () => {
         if (user.isValid) {
             auth.signInWithEmailAndPassword(user.email, user.password)
             .then(res=>{
-                window.history.back()
+                // window.history.back()
             }
                 
             )
@@ -131,7 +140,7 @@ const Login = () => {
                         <br/>
                         <input onBlur={handleChange} type="password" name="password" placeholder="Password" id="" required/>
                         <br/>
-                        <input onBlur={handleChange} type="password" name="password" placeholder="Confirm Password" id="" required/>
+                        <input onBlur={handleChange} type="password" name="confirmPass" placeholder="Confirm Password" id="" required/>
                         <br/>
                         <input type="submit" value="CreateAccount" name="" className="btn-submit"/>
                         <br/>
