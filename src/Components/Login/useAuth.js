@@ -98,6 +98,7 @@ const Auth=()=>{
     const signOut=()=>{
         firebase.auth().signOut()
         .then(res=>{
+          window.location.pathname="/";
             const signedOutUser={
                 isSignedIn: false,
                 name: '',
@@ -110,6 +111,7 @@ const Auth=()=>{
                 existingUser: false
               }
             setUser(signedOutUser);
+            
             return user;
         })
         .catch(err=>{
