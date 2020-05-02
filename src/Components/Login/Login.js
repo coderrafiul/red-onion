@@ -65,9 +65,9 @@ const Login = () => {
             alert("Passwords don't match");
         } else {
             if (user.isValid) {
-                auth.signUp(user.email, user.password, user.name)
+                auth.signUp(user.email, user.password)
                 .then(res=>{
-                    // window.history.back()
+                    window.history.back()
                 })
              
              }
@@ -86,7 +86,7 @@ const Login = () => {
         if (user.isValid) {
             auth.signInWithEmailAndPassword(user.email, user.password)
             .then(res=>{
-                // window.history.back()
+                window.history.back()
             }
                 
             )
