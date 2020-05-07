@@ -1,5 +1,5 @@
 import React from 'react';
-import demoMap from '../../images/demoMap.jpg'
+import ordercomplete from '../../images/ordercomplete.png'
 import deliveryLogo from '../../images/Group 1151.png'
 import helmetLogo from '../../images/Group 1152.png'
 import './OrderComplete.css'
@@ -11,7 +11,7 @@ const OrderComplete = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-md-8 map">
-                        <img src={demoMap} alt=""/>
+                        <img src={ordercomplete} alt=""/>
                     </div>
 
                     <div className="col-md-4 summary d-flex justify-content-center">

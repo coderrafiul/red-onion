@@ -101,6 +101,7 @@ const Login = () => {
     
 
     return (
+        <div className="login-page">
 
         <div className="container">
             <div className="row">
@@ -158,6 +159,7 @@ const Login = () => {
 
                 </div>
             </div>
+        </div>
         </div>
     );
 };

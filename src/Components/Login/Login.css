@@ -17,3 +17,14 @@ input.btn-submit{
     color: white;
     font-weight: 400;
 }
+
+.login-page{
+    background-image: url(../../images/signup-bg.png);
+    background-size: cover;
+    background-position: bottom;
+    height: 720px;
+    
+}
+
+
+
