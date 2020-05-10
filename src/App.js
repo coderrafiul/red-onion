@@ -24,6 +24,7 @@ import Inventory from './Components/Inventory/Inventory';
 
 function App() {
 
+
   const[finalCart, setFinalCart]= useState([])
 
   const [qnty, setQnty]= useState(1);

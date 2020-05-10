@@ -2,24 +2,37 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import './Shipment.css'
 import Review from '../Review/Review';
-import foodsData from '../../fakeItems/foodsData'
-import { getDatabaseCart } from '../../utilities/databaseManager';
+import { getDatabaseCart, processOrder } from '../../utilities/databaseManager';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../Login/useAuth';
 
 const Shipment = (props) => {
+
+    const[menu, setMenu]= useState([]);
 
     const[customer, setCustomer]= useState(null)
 
 
     const { register, handleSubmit,errors } = useForm();
+    const auth= useAuth();
     const onSubmit = data => {
         const newCustomer= {data};
         setCustomer(newCustomer);
+      
     };
 
     console.log("Buyer", customer);
-    
+
+
+    useEffect(()=>{
+        fetch('http://localhost:4300/foods')
+        .then(res=> res.json())
+        .then(data=>{
+            console.log('Data from database',data)
+            setMenu(data)
+        })
+    },[])
 
     
     useEffect(()=>{
@@ -27,21 +40,43 @@ const Shipment = (props) => {
         const savedCart= getDatabaseCart();
         const foodId= Object.keys(savedCart);
 
-        const cartFoods= foodId.map(id => {
-            const addedFood = foodsData.find(food => food.id == id);
-            addedFood.quantity= savedCart[id];
-            return addedFood;
-        })
-
-
-        console.log(cartFoods)
-
-        props.setFinalCart(cartFoods)
-        
+        if(menu.length){
+            const cartFoods= foodId.map(id => {
+                const addedFood = menu.find(food => food.id == id);
+                addedFood.quantity= savedCart[id];
+                return addedFood;
+            })
+    
+    
+            console.log(cartFoods)
+    
+            props.setFinalCart(cartFoods)
+            
+        }
      
     },[])
 
     const cart= props.finalCart;
+
+    const handlePlaceOrder=()=>{
+        console.log(auth.user.email);
+        
+        const orderDetails= {email:auth.user.email, cart: cart , shipment: customer}
+        console.log(orderDetails);
+        fetch('http://localhost:4300/placeOrder', {
+            method: 'POST',
+            body: JSON.stringify(orderDetails),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+                }
+        })
+        .then(res=> res.json())
+        .then(data=>{
+            console.log('Order placed');
+            alert('Order placed successfully with Order-Id: ' + data._id);
+            processOrder();
+        })
+    }
 
     const subTotal= cart.reduce((subTotal, food)=> subTotal + food.price*food.quantity,0);
     const tax= subTotal/10;
@@ -105,7 +140,7 @@ const Shipment = (props) => {
                     {
                         customer ?
                         <Link to="/ordered">
-                        <button className="btn btn-secondary btn-lg place-order">Place Order</button>
+                        <button className="btn btn-secondary btn-lg place-order" onClick={handlePlaceOrder}>Place Order</button>
                         </Link>
                         :
                         <button className="btn btn-secondary btn-lg place-order" disabled>Place Order</button>

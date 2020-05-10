@@ -33,7 +33,7 @@ const OrderComplete = () => {
                             <h6>Estimated delivery time</h6>
                         </div>
                         <div className="raider">
-                        <div class="card mb-3" style={{maxWidth: 90+ "%"}}>
+                        <div className="card mb-3" style={{maxWidth: 90+ "%"}}>
                             <div className="row no-gutters d-flex justify-content-around align-items-center">
                                 <div className="col-md-4">
                                 <img src={ helmetLogo } className="card-img" alt="..."/>
@@ -41,7 +41,7 @@ const OrderComplete = () => {
                                 <div className="col-md-8">
                                 <div className="card-body">
                                     <h6 className="card-title raider">Hamim</h6>
-                                    <p className="card-text"><small class="text-muted">Your raider</small></p>
+                                    <p className="card-text"><small className="text-muted">Your raider</small></p>
                                 </div>
                                 </div>
                             </div>

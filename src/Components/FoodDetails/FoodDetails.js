@@ -1,19 +1,27 @@
-import React, { useContext } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import foodsData from '../../fakeItems/foodsData'
+import React from 'react';
+import { useParams} from 'react-router-dom';
 import './FoodDetails.css';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 
 const FoodDetails = (props) => {
-  
     const{foodId}=useParams();
-    const itemFoodDetails= foodsData.find(fd=>fd.id == foodId);
+    const [currentFood, setCurrentFood]= useState({})
 
-    console.log(itemFoodDetails)
-    const{name, price, description, img}= itemFoodDetails;
+    useEffect(()=>{
+        fetch('http://localhost:4300/foods/'+foodId)
+        .then(res => res.json())
+        .then(data=>{
+            console.log(data)
+            setCurrentFood(data)
+        })
 
-    const itemPrice= props.qnty
-    const totalPrice= price*itemPrice;
+    },[foodId])
+  
+
+    const itemCount= props.qnty;
+    const totalPrice= currentFood.price*itemCount;
     return (
         <div className="container d-flex justify-content-start">
             
@@ -22,8 +30,8 @@ const FoodDetails = (props) => {
                     
                     <div className="col-md-6">
                     <div className="card-body">
-                        <h1 className="card-title">{name}</h1>
-                        <h3 className="card-text">{description}</h3>
+                        <h1 className="card-title">{currentFood.name}</h1>
+                        <h3 className="card-text">{currentFood.description}</h3>
                         <br/>
                         <div className="d-flex justify-content-between">
                         <div>
@@ -37,12 +45,12 @@ const FoodDetails = (props) => {
                         </div>
                         </div>
                         <div className="addToCart">
-                            <input type="submit" value="Add to cart" onClick={()=>props.addToCart(itemFoodDetails) & window.history.back()} />
+                            <input type="submit" value="Add to cart" onClick={()=>props.addToCart(currentFood) & window.history.back()} />
                         </div>
                     </div>
                     </div>
                     <div className="col-md-6">
-                    <img src={img} className="card-img" alt="..."/>
+                    <img src={currentFood.img} className="card-img" alt="..."/>
                     </div>
                 </div>
                 </div>
