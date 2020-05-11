@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 
 
 const FoodDetails = (props) => {
+    console.log(props)
     const{foodId}=useParams();
     const [currentFood, setCurrentFood]= useState({})
 
@@ -14,14 +15,15 @@ const FoodDetails = (props) => {
         .then(res => res.json())
         .then(data=>{
             console.log(data)
+            data.quantity= props.quantity;
             setCurrentFood(data)
         })
 
-    },[foodId])
-  
+    },[foodId, props.quantity])
 
-    const itemCount= props.qnty;
+    const itemCount= props.quantity;
     const totalPrice= currentFood.price*itemCount;
+ 
     return (
         <div className="container d-flex justify-content-start">
             
@@ -40,7 +42,7 @@ const FoodDetails = (props) => {
                         <br/>
                         <div className="input-group">
                         <button onClick={props.handleAdd}>+</button>
-                        <input className="text-center" type="text" name="qnty" value={props.qnty}/>
+                        <input className="text-center" type="text" name="quantity" value={props.quantity}/>
                         <button onClick={props.handleRemove}>-</button>
                         </div>
                         </div>

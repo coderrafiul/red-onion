@@ -14,28 +14,33 @@ import {
 } from "react-router-dom";
 import FoodDetails from './Components/FoodDetails/FoodDetails';
 import Login from './Components/Login/Login';
-import { addToDatabaseCart } from './utilities/databaseManager';
-import { AuthContextProvider, PrivateRoute } from './Components/Login/useAuth';
+import { addToDatabaseCart, processOrder } from './utilities/databaseManager';
+import { AuthContextProvider, PrivateRoute, useAuth } from './Components/Login/useAuth';
 import Shipment from './Components/Shipment/Shipment';
 import OrderComplete from './Components/OrderComplete/OrderComplete';
 import Inventory from './Components/Inventory/Inventory';
+import Payment from './Components/CheckOutForm/Payment';
 
 
 
 function App() {
 
 
-  const[finalCart, setFinalCart]= useState([])
 
-  const [qnty, setQnty]= useState(1);
+  const[finalCart, setFinalCart]= useState([]);
+
+
+  const [quantity, setQuantity]= useState(1);
+
+  const [orderId, setOrderId]= useState(null);
 
 
   const handleAdd= ()=>{
-      setQnty (qnty+1);
+    setQuantity (quantity+1);
   }
 
   const handleRemove=()=>{
-      setQnty(qnty-1)
+    setQuantity(quantity-1)
   }
 
   
@@ -52,8 +57,10 @@ function App() {
       const newCart = [...finalCart,food]
       setFinalCart(newCart);
     }
-    addToDatabaseCart(food.id,qnty)
+    addToDatabaseCart(food.id, quantity)
   }
+
+
 
   return (
 
@@ -72,19 +79,19 @@ function App() {
                   <Footer></Footer>
                   </Route>
                   <Route path="/FoodDetails/:foodId">
-                    <FoodDetails addToCart={addToCart} handleAdd={handleAdd} handleRemove={handleRemove} qnty={qnty}></FoodDetails>
+                    <FoodDetails addToCart={addToCart} handleAdd={handleAdd} handleRemove={handleRemove} quantity={quantity}></FoodDetails>
                   </Route>
                   <Route path="/login">
                     <Login></Login>
                   </Route>
                   <PrivateRoute path="/shipment">
-                    <Shipment finalCart={finalCart} setFinalCart={setFinalCart}></Shipment>
+                    <Shipment finalCart={finalCart} setFinalCart={setFinalCart} orderId={orderId} setOrderId={setOrderId}></Shipment>
                   </PrivateRoute>
-                  <Route path="/ordered">
-                    <OrderComplete></OrderComplete>
-                  </Route>
                   <Route path='/inventory'>
                     <Inventory></Inventory>
+                  </Route>
+                  <Route path="/ordered">
+                    <OrderComplete orderId={orderId} setOrderId={setOrderId}></OrderComplete>
                   </Route>
                   <Route path="*">
                     <NotFound></NotFound>

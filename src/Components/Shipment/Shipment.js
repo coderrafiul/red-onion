@@ -6,23 +6,39 @@ import { getDatabaseCart, processOrder } from '../../utilities/databaseManager';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../Login/useAuth';
+import {loadStripe} from '@stripe/stripe-js';
+import {Elements} from '@stripe/react-stripe-js';
+import CheckoutForm from '../CheckOutForm/CheckOutForm';
+
+
 
 const Shipment = (props) => {
+  
+
+    const { register, handleSubmit,errors } = useForm();
+    // const [orderId, setOrderId]= useState(null);
+    const orderId= props.orderId;
+    const setOrderId= props.setOrderId
 
     const[menu, setMenu]= useState([]);
 
-    const[customer, setCustomer]= useState(null)
+    const[customer, setCustomer]= useState(null);
+
+    const[user, setUser]= useState(null)
+
+    const stripePromise = loadStripe('pk_test_6Q68hGTzOu1GetiEvUPF6QX700Qrmfil9z');
 
 
-    const { register, handleSubmit,errors } = useForm();
     const auth= useAuth();
+
+    console.log(auth.user.email);
+    
     const onSubmit = data => {
-        const newCustomer= {data};
-        setCustomer(newCustomer);
+        setCustomer(data);
       
     };
 
-    console.log("Buyer", customer);
+  
 
 
     useEffect(()=>{
@@ -58,11 +74,10 @@ const Shipment = (props) => {
 
     const cart= props.finalCart;
 
-    const handlePlaceOrder=()=>{
-        console.log(auth.user.email);
+    const handlePlaceOrder=(payment)=>{
         
-        const orderDetails= {email:auth.user.email, cart: cart , shipment: customer}
-        console.log(orderDetails);
+        const orderDetails= {email:auth.user.email, cart: cart , shipment: customer, payment: payment}
+        
         fetch('http://localhost:4300/placeOrder', {
             method: 'POST',
             body: JSON.stringify(orderDetails),
@@ -71,13 +86,14 @@ const Shipment = (props) => {
                 }
         })
         .then(res=> res.json())
-        .then(data=>{
-            console.log('Order placed');
-            alert('Order placed successfully with Order-Id: ' + data._id);
+        .then(order=>{
+            setUser(true);
+            setOrderId(order._id);
             processOrder();
         })
     }
 
+    
     const subTotal= cart.reduce((subTotal, food)=> subTotal + food.price*food.quantity,0);
     const tax= subTotal/10;
     const delivery= 10;
@@ -91,8 +107,8 @@ const Shipment = (props) => {
     return (
         <div className="container">
             
-            <div className="row ">
-                <div className="delivery col-md-6">
+            <div className="row" style={{display: customer && 'none'}}>
+                <div className="delivery col-md-6"  >
 
 
                     <h3 className="ship-header">Edit Delivery Details</h3>
@@ -139,9 +155,9 @@ const Shipment = (props) => {
                     </div>
                     {
                         customer ?
-                        <Link to="/ordered">
+                        
                         <button className="btn btn-secondary btn-lg place-order" onClick={handlePlaceOrder}>Place Order</button>
-                        </Link>
+                        
                         :
                         <button className="btn btn-secondary btn-lg place-order" disabled>Place Order</button>
                     }
@@ -149,6 +165,32 @@ const Shipment = (props) => {
                 </div>
 
             </div>
+
+            <div className="row" >
+                <div className="col-md-6" style={{display: customer ? 'block' : 'none'}}>
+                <h3>Payment Information</h3>
+                    <Elements stripe={stripePromise}>
+                        <CheckoutForm handlePlaceOrder={handlePlaceOrder}></CheckoutForm>
+                    </Elements>
+                    <br/>
+                    {
+                       orderId && <div>
+                           <h3>Thank you for shopping with us</h3>
+                           <p>Your Order Id is {orderId}</p>
+                           <br/>
+                           <Link to='/ordered'>
+                            <button className="btn btn-secondary">Proceed</button>
+                            </Link>
+                       </div>
+                   }
+
+                   
+
+                    
+                </div>
+            </div>
+
+        
         </div>
         
     );

@@ -5,13 +5,29 @@ import helmetLogo from '../../images/Group 1152.png'
 import './OrderComplete.css'
 
 
-const OrderComplete = () => {
+const OrderComplete = (props) => {
+
+    const orderId= props.orderId;
+    console.log(orderId)
+
+
     return (
         <div>
             <div className="container">
                 <div className="row">
+                    
+                
                     <div className="col-md-8 map">
                         <img src={ordercomplete} alt=""/>
+                        <br/>
+                  
+                    {
+                       orderId && <div>
+                           <h3>Thank you for shopping with us</h3>
+                           <p>Your Order Id is {orderId}</p>
+                       </div>
+                   }
+                  
                     </div>
 
                     <div className="col-md-4 summary d-flex justify-content-center">
