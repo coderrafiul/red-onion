@@ -42,7 +42,7 @@ const Shipment = (props) => {
 
 
     useEffect(()=>{
-        fetch('http://localhost:4300/foods')
+        fetch('http://glacial-headland-23319.herokuapp.com/foods')
         .then(res=> res.json())
         .then(data=>{
             console.log('Data from database',data)
@@ -78,7 +78,7 @@ const Shipment = (props) => {
         
         const orderDetails= {email:auth.user.email, cart: cart , shipment: customer, payment: payment}
         
-        fetch('http://localhost:4300/placeOrder', {
+        fetch('http://glacial-headland-23319.herokuapp.com/placeOrder', {
             method: 'POST',
             body: JSON.stringify(orderDetails),
             headers: {
