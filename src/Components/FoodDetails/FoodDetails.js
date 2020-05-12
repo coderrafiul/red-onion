@@ -11,7 +11,7 @@ const FoodDetails = (props) => {
     const [currentFood, setCurrentFood]= useState({})
 
     useEffect(()=>{
-        fetch('http://glacial-headland-23319.herokuapp.com/foods/'+foodId)
+        fetch('https://glacial-headland-23319.herokuapp.com/foods/'+foodId)
         .then(res => res.json())
         .then(data=>{
             console.log(data)

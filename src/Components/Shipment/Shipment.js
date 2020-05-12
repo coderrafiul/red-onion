@@ -24,7 +24,7 @@ const Shipment = (props) => {
 
     const[customer, setCustomer]= useState(null);
 
-    const[user, setUser]= useState(null)
+    const[toggle, setToggle]= useState(null)
 
     const stripePromise = loadStripe('pk_test_6Q68hGTzOu1GetiEvUPF6QX700Qrmfil9z');
 
@@ -38,11 +38,15 @@ const Shipment = (props) => {
       
     };
 
+    const handleToggle=()=>{
+        setToggle(true)
+    }
+
   
 
 
     useEffect(()=>{
-        fetch('http://glacial-headland-23319.herokuapp.com/foods')
+        fetch('https://glacial-headland-23319.herokuapp.com/foods')
         .then(res=> res.json())
         .then(data=>{
             console.log('Data from database',data)
@@ -78,7 +82,7 @@ const Shipment = (props) => {
         
         const orderDetails= {email:auth.user.email, cart: cart , shipment: customer, payment: payment}
         
-        fetch('http://glacial-headland-23319.herokuapp.com/placeOrder', {
+        fetch('https://glacial-headland-23319.herokuapp.com/placeOrder', {
             method: 'POST',
             body: JSON.stringify(orderDetails),
             headers: {
@@ -87,7 +91,7 @@ const Shipment = (props) => {
         })
         .then(res=> res.json())
         .then(order=>{
-            setUser(true);
+            
             setOrderId(order._id);
             processOrder();
         })
@@ -107,7 +111,7 @@ const Shipment = (props) => {
     return (
         <div className="container">
             
-            <div className="row" style={{display: customer && 'none'}}>
+            <div className="row">
                 <div className="delivery col-md-6"  >
 
 
@@ -139,7 +143,7 @@ const Shipment = (props) => {
                     </form>
                 </div>
 
-                <div className="order-preview col-md-6">
+                <div className="order-preview col-md-6" style={{display: toggle && 'none'}}>
                     <div className="order-info">
                         <h5>From Uttara Mascot Plaza</h5>
                         <h6>Arriving in 20-30 minutes</h6>
@@ -156,7 +160,7 @@ const Shipment = (props) => {
                     {
                         customer ?
                         
-                        <button className="btn btn-secondary btn-lg place-order" onClick={handlePlaceOrder}>Place Order</button>
+                        <button className="btn btn-secondary btn-lg place-order" onClick={handleToggle}>Place Order</button>
                         
                         :
                         <button className="btn btn-secondary btn-lg place-order" disabled>Place Order</button>
@@ -164,10 +168,7 @@ const Shipment = (props) => {
 
                 </div>
 
-            </div>
-
-            <div className="row" >
-                <div className="col-md-6" style={{display: customer ? 'block' : 'none'}}>
+                <div className="col-md-6" style={{display: toggle ? 'block' : 'none', marginTop: '200px'}}>
                 <h3>Payment Information</h3>
                     <Elements stripe={stripePromise}>
                         <CheckoutForm handlePlaceOrder={handlePlaceOrder}></CheckoutForm>
@@ -175,7 +176,7 @@ const Shipment = (props) => {
                     <br/>
                     {
                        orderId && <div>
-                           <h3>Thank you for shopping with us</h3>
+                           <h3>Thank you for choosing our restaurant.</h3>
                            <p>Your Order Id is {orderId}</p>
                            <br/>
                            <Link to='/ordered'>
@@ -188,7 +189,12 @@ const Shipment = (props) => {
 
                     
                 </div>
+
             </div>
+
+            
+                
+          
 
         
         </div>

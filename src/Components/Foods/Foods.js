@@ -14,7 +14,7 @@ const Foods = (props) => {
     const[selectedFoodType, setSelectedFoodType]= useState("Lunch")
 
     useEffect(()=>{
-        fetch('http://glacial-headland-23319.herokuapp.com/foods')
+        fetch('https://glacial-headland-23319.herokuapp.com/foods')
         .then(res=> res.json())
         .then(data=>{
             console.log('Data from database',data)

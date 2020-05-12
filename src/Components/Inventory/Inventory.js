@@ -6,7 +6,7 @@ const Inventory = () => {
     const handleAddItem= ()=>{
         const food= foodsData[0];
         console.log('Before post',food);
-        fetch('http://glacial-headland-23319.herokuapp.com/addFood', {
+        fetch('https://glacial-headland-23319.herokuapp.com/addFood', {
             method: 'POST',
             body: JSON.stringify(foodsData),
             headers: {

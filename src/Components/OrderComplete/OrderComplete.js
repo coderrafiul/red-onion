@@ -23,8 +23,9 @@ const OrderComplete = (props) => {
                   
                     {
                        orderId && <div>
-                           <h3>Thank you for shopping with us</h3>
+                           
                            <p>Your Order Id is {orderId}</p>
+                           <h3>We are on the way to deliver your order.</h3>
                        </div>
                    }
                   
